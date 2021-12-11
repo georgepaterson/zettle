@@ -34,17 +34,81 @@ async function getOrders() {
 };
 
 /*
+    Set payload to send to Zettle.
+*/
+
+async function setPayload(items) {
+    try {
+        console.log('Set payload: ', items);
+        return {
+            success: true,
+            data: items
+        }
+    } catch (error) {
+        console.log(error)
+        await logError('FAILURE TO ADD PRODUCTS TO IZETTLE', e)
+        return {
+            success: false,
+            error: error
+        }
+    }
+}
+
+/*
+    Post orders to Zettle.
+*/
+
+async function postOrders(items) {
+    try {
+        console.log('Post orders: ', items);
+        return {
+            success: true,
+            data: items
+        }
+    } catch (error) {
+        console.log(error)
+        await logError('FAILURE TO ADD PRODUCTS TO IZETTLE', e)
+        return {
+            success: false,
+            error: error
+        }
+    }
+}
+
+/*
     Add orders to Zettle.
 */
 
 async function add() {
     const access = await token();
     const orders = await getOrders();
-    console.log(access);
-    console.log(orders);
-    console.log("add");
-
-
+    if (orders.success) {
+        const payload = await setPayload(orders.data);
+        if (payload.success) {
+            const response = await postOrders(payload.data);
+            if (response.success) {
+                return {
+                    success: true,
+                    data: response.data
+                }
+            } else {
+                return {
+                    success: false,
+                    data: response.data
+                }
+            }
+        } else {
+            return {
+                success: false,
+                error: 'Failed to set payload for appointment'
+            }
+        }
+    } else {
+        return {
+            success: orders.success,
+            error: orders.data
+        }
+    }
 };
 
 module.exports = add;
