@@ -24,7 +24,7 @@ async function token() {
         }
     } catch (e) {
         console.log(e)
-        await logError('FAILURE TO GET ACCESS TOKEN FOR IZETTLE', e)
+        await logError('FAILURE TO GET ACCESS TOKEN FOR ZETTLE', e)
         return {
             success: false,
             data: e
