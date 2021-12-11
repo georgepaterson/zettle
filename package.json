@@ -1,0 +1,23 @@
+{
+  "name": "zettle",
+  "version": "1.0.0",
+  "description": "Deploy and remove products from Zettle with a given data source.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georgepaterson/zettle.git"
+  },
+  "author": "George Paterson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/georgepaterson/zettle/issues"
+  },
+  "homepage": "https://github.com/georgepaterson/zettle#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
