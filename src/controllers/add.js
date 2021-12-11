@@ -2,6 +2,10 @@ const Order = require('../models/order');
 const moment = require('moment');
 const token = require('./token');
 
+/*
+    Get all orders for today.
+*/
+
 async function getOrders() {
     try {
         const start = moment().startOf('day').format();
@@ -28,6 +32,10 @@ async function getOrders() {
         }
     }
 };
+
+/*
+    Add orders to Zettle.
+*/
 
 async function add() {
     const access = await token();
