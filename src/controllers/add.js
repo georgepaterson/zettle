@@ -46,7 +46,7 @@ async function setPayload(items) {
         }
     } catch (error) {
         console.log(error)
-        await logError('FAILURE TO ADD PRODUCTS TO IZETTLE', e)
+        await logError('FAILURE TO SET PAYLOAD', e)
         return {
             success: false,
             error: error

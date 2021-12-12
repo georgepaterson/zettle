@@ -1,11 +1,11 @@
-
 const express = require('express');
 const app = express();
-require('dotenv').config();
 const mongoose = require('mongoose');
 const add = require('./controllers/add');
 const remove = require('./controllers/remove');
 const cron = require('node-cron');
+
+require('dotenv').config();
 
 const db = process.env.MONGODB_URI;
 
