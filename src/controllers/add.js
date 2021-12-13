@@ -8,24 +8,27 @@ const token = require('./token');
 
 async function getOrders() {
     try {
+        // Get the day today.
         const start = moment().startOf('day').format();
         const end = moment().endOf('day').format();
+        // Get orders for today from database.
         const orders = await Order.find({
             'appointment.date': { $gt: start, $lt: end },
         });
         console.log('On Day: ', 'Zettle orders: ', orders.length);
+        // If no orders for today, return empty data.
         if (orders.length === 0) {
             return {
                 success: false,
                 data: 'No Products to add to Zettle'
             }
         }
+        // If orders for today, return orders.
         return {
             success: true,
             data: orders
         }
     } catch (error) {
-        await logError('FAILURE TO GET ORDER FOR ZETTLE', error)
         return {
             success: false,
             data: 'FAILURE TO GET ORDER FOR ZETTLE'
@@ -45,8 +48,6 @@ async function setPayload(items) {
             data: items
         }
     } catch (error) {
-        console.log(error)
-        await logError('FAILURE TO SET PAYLOAD', e)
         return {
             success: false,
             error: error
@@ -66,8 +67,6 @@ async function postOrders(items) {
             data: items
         }
     } catch (error) {
-        console.log(error)
-        await logError('FAILURE TO ADD PRODUCTS TO IZETTLE', e)
         return {
             success: false,
             error: error

@@ -17,6 +17,7 @@ async function getZettle(token) {
             url: url,
             data: {}
         });
+        // Return Zettle products.
         return {
             success: true,
             data: response.data
@@ -45,6 +46,7 @@ async function filterZettle(products) {
                 list.push(product.uuid);
             }
         })
+        // Return filtered Zettle products.
         return {
             success: true,
             data: list
