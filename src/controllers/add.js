@@ -76,7 +76,7 @@ async function postOrders(items) {
 }
 
 /*
-    Add orders to Zettle.
+    Add orders to Zettle controller.
 */
 
 async function add() {

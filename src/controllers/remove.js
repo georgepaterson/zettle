@@ -1,10 +1,13 @@
 const axios = require('axios');
 const token = require('./token');
 
+/*
+* Get current Zettle products
+*/
 
 async function getZettle(token) {
     try {
-        const url = 'https://products.izettle.com/organizations/' + process.env.IZETTLE_ORGANISATION;
+        const url = 'https://products.izettle.com/organizations/' + process.env.ZETTLE_ORGANISATION;
         const response = await axios({
             headers: {
                 'content-type': 'application/json',
@@ -25,6 +28,10 @@ async function getZettle(token) {
         }
     }
 }
+
+/*
+* Filter Zettle products for product categories that should not be removed.
+*/
 
 async function filterZettle(products) {
     try {
@@ -50,6 +57,10 @@ async function filterZettle(products) {
     }
 }
 
+/*
+* Remove Zettle products from the filtered list of products.
+*/
+
 async function postZettle(list) {
     try {
         console.log(list);
@@ -65,6 +76,10 @@ async function postZettle(list) {
         }
     }
 }
+
+/*
+* Remove Zettle products controller.
+*/
 
 async function remove() {
     const access = await token();

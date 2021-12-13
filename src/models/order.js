@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 /*
-* Order Schema
+* Order Schema.
 */
 
 const OrderSchema = new Schema({
@@ -14,7 +14,7 @@ const OrderSchema = new Schema({
 });
 
 /*
-* Export the model
+* Export the model.
 */
 
 const Orders = mongoose.model("orders", OrderSchema);

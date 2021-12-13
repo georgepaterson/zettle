@@ -18,19 +18,29 @@ mongoose
   .catch(err => console.log(err));
 
 /*
-* Set up middleware
+* Set up middleware.
+*/
+
+/*
+* Remove products from Zettle.
+* Removing is triggered using node cron.
 */
 
 cron.schedule('* * * * *', () => {
     remove();
 });
 
+/*
+* Add products to Zettle.
+* Adding is triggered using node cron.
+*/
+
 cron.schedule('* * * * *', () => {
     add();
 });
 
 /*
-* Set up routes
+* Set up routes.
 */
 
 const PORT = process.env.PORT || 3000;
