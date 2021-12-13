@@ -42,6 +42,7 @@ cron.schedule('* * * * *', () => {
 /*
 * Set up routes.
 */
+app.get('/health', require('./controllers/health'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
