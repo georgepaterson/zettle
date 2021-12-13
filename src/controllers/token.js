@@ -1,6 +1,10 @@
 const axios = require('axios');
 const qs = require('qs');
 
+/*
+* Get a fresh token from Zettle
+*/
+
 async function token() {
     try {
         const url = 'https://oauth.izettle.com/token'

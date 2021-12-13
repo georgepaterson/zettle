@@ -7,12 +7,19 @@ const cron = require('node-cron');
 
 require('dotenv').config();
 
-const db = process.env.MONGODB_URI;
+/*
+* Connect to MongoDB
+*/
 
+const db = process.env.MONGODB_URI;
 mongoose
   .connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err));
+
+/*
+* Set up middleware
+*/
 
 cron.schedule('* * * * *', () => {
     remove();
@@ -21,6 +28,10 @@ cron.schedule('* * * * *', () => {
 cron.schedule('* * * * *', () => {
     add();
 });
+
+/*
+* Set up routes
+*/
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
