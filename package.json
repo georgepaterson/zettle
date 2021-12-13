@@ -4,8 +4,10 @@
   "description": "Deploy and remove products from Zettle with a given data source.",
   "main": "server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "test": "mocha"
+    "start": "nodemon src/server.js --watch src",
+    "test": "mocha",
+    "lint": "eslint src/**",
+    "fix": "eslint src/** --fix"
   },
   "repository": {
     "type": "git",

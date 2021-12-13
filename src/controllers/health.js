@@ -5,17 +5,17 @@ const Order = require('../models/order');
 */
 
 async function health(req, res) {
-    let db
-    try {
-        db = await Order.countDocuments();
-        if (db >= 0) {
-            res.json(true)
-        } else {
-            res.json(false)
-        }
-    } catch (error) {
-        res.json(error)
+  let db;
+  try {
+    db = await Order.countDocuments();
+    if (db >= 0) {
+      res.json(true);
+    } else {
+      res.json(false);
     }
-};
+  } catch (error) {
+    res.json(error);
+  }
+}
 
 module.exports = health;

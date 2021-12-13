@@ -6,28 +6,28 @@ const token = require('./token');
 */
 
 async function getZettle(token) {
-    try {
-        const url = 'https://products.izettle.com/organizations/' + process.env.ZETTLE_ORGANISATION;
-        const response = await axios({
-            headers: {
-                'content-type': 'application/json',
-                Authorization: `Bearer ${token}`
-            },
-            method: 'get',
-            url: url,
-            data: {}
-        });
-        // Return Zettle products.
-        return {
-            success: true,
-            data: response.data
-        }
-    } catch (error) {
-        return {
-            success: false,
-            data: `Failed to get Zettle products:: ${error}`
-        }
-    }
+  try {
+    const url = `https://products.izettle.com/organizations/${process.env.ZETTLE_ORGANISATION}`;
+    const response = await axios({
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      method: 'get',
+      url,
+      data: {},
+    });
+    // Return Zettle products.
+    return {
+      success: true,
+      data: response.data,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      data: `Failed to get Zettle products:: ${error}`,
+    };
+  }
 }
 
 /*
@@ -35,28 +35,28 @@ async function getZettle(token) {
 */
 
 async function filterZettle(products) {
-    try {
-        const list = [];
-        products.forEach((product) => {
-            if(product.category) {
-                if(!product.category.name.includes('Service Fees')) {
-                    list.push(product.uuid);
-                }
-            } else {
-                list.push(product.uuid);
-            }
-        })
-        // Return filtered Zettle products.
-        return {
-            success: true,
-            data: list
+  try {
+    const list = [];
+    products.forEach((product) => {
+      if (product.category) {
+        if (!product.category.name.includes('Service Fees')) {
+          list.push(product.uuid);
         }
-    } catch (error) {
-        return {
-            success: false,
-            data: `Failed to filter Zettle product: ${error}`
-        }
-    }
+      } else {
+        list.push(product.uuid);
+      }
+    });
+    // Return filtered Zettle products.
+    return {
+      success: true,
+      data: list,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      data: `Failed to filter Zettle product: ${error}`,
+    };
+  }
 }
 
 /*
@@ -64,19 +64,19 @@ async function filterZettle(products) {
 */
 
 async function postZettle(list) {
-    try {
-        console.log(list);
-        
-        return {
-            success: true,
-            data: list
-        }
-    } catch (error) {
-        return {
-            success: false,
-            data: `Failed to remove Zettle product: ${error}`
-        }
-    }
+  try {
+    console.log(list);
+
+    return {
+      success: true,
+      data: list,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      data: `Failed to remove Zettle product: ${error}`,
+    };
+  }
 }
 
 /*
@@ -84,10 +84,10 @@ async function postZettle(list) {
 */
 
 async function remove() {
-    const access = await token();
-    const products = await getZettle(access.data.access_token);
-    const filtered = await filterZettle(products.data);
-    const removed = await postZettle(filtered.data);
-};
+  const access = await token();
+  const products = await getZettle(access.data.access_token);
+  const filtered = await filterZettle(products.data);
+  const removed = await postZettle(filtered.data);
+}
 
 module.exports = remove;

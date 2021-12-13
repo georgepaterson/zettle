@@ -1,9 +1,10 @@
 const express = require('express');
+
 const app = express();
 const mongoose = require('mongoose');
+const cron = require('node-cron');
 const add = require('./controllers/add');
 const remove = require('./controllers/remove');
-const cron = require('node-cron');
 
 require('dotenv').config();
 
@@ -13,9 +14,9 @@ require('dotenv').config();
 
 const db = process.env.MONGODB_URI;
 mongoose
-  .connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
-  .then(() => console.log("MongoDB successfully connected"))
-  .catch(err => console.log(err));
+  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB successfully connected'))
+  .catch((err) => console.log(err));
 
 /*
 * Set up middleware.
@@ -27,7 +28,7 @@ mongoose
 */
 
 cron.schedule('* * * * *', () => {
-    remove();
+  remove();
 });
 
 /*
@@ -36,7 +37,7 @@ cron.schedule('* * * * *', () => {
 */
 
 cron.schedule('* * * * *', () => {
-    add();
+  add();
 });
 
 /*
